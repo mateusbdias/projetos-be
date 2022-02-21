@@ -1,4 +1,4 @@
-package Aula01;
+package Aula01_JUnit;
 
 public class Person {
     private String nome;
