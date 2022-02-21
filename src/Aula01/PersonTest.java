@@ -1,14 +1,19 @@
 package Aula01;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class PersonTest {
+    private Person person = new Person("Mateus", "Dias",
+            "mateus@mail.com", 27);
 
-    @org.junit.jupiter.api.Test
-    void exibirNome() {
+    @Test
+    void exibirNomeTeste() {
+        assertEquals("Dias, Mateus", person.exibirNome());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void maiorIdade() {
+        assertTrue(person.maiorIdade());
     }
 }

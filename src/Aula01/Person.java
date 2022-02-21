@@ -45,8 +45,8 @@ public class Person {
         this.idade = idade;
     }
 
-    public void exibirNome(){
-        System.out.println(getSobrenome() + ", " + getNome());
+    public String exibirNome(){
+        return getSobrenome() + ", " + getNome();
     }
 
     public boolean maiorIdade(){
