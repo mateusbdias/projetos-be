@@ -1,4 +1,4 @@
-package Aula01_JUnit;
+package Aula01A_JUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
