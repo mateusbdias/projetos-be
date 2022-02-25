@@ -45,6 +45,20 @@ public class IP {
         this.oct4 = oct4;
     }
 
+    public String getPais() {
+        String pais = "";
+        if (this.oct1 >= 0 && this.oct1 <= 49) {
+            pais = "Argentina";
+        } else if (this.oct1 >= 50 && this.oct1 <= 99) {
+            pais = "Brasil";
+        } else if (this.oct1 >= 100 && this.oct1 <= 149) {
+            pais = "Colombia";
+        } else {
+            pais = "N/A";
+        }
+        return pais;
+    }
+
     @Override
     public String toString() {
         return "IP = " + oct1 + "." + oct2 + "." + oct3 + "." + oct4;
