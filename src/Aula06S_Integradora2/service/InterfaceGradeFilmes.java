@@ -5,6 +5,6 @@ import Aula06S_Integradora2.model.Filme;
 
 public interface InterfaceGradeFilmes {
 
-    public Filme getFilme(String titulo) throws FilmeNaoHabilitadoException;
+    Filme getFilme(String titulo) throws FilmeNaoHabilitadoException;
 
 }
