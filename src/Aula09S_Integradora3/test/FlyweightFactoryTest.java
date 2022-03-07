@@ -1,6 +1,7 @@
 package Aula09S_Integradora3.test;
 
 import Aula09S_Integradora3.model.Triangulo;
+import Aula09S_Integradora3.model.Quadrado;
 import Aula09S_Integradora3.service.FlyweightFactory;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,24 @@ public class FlyweightFactoryTest {
         assertEquals(triangulo.getCor(), "vermelho");
         assertEquals(triangulo1.getTamanho(), 4);
         assertEquals(FlyweightFactory.trianguloMap.size() == 2, true);
+
+    }
+
+    @Test
+    void getQuadrado() {
+
+        Quadrado quadrado = FlyweightFactory.obterQuadrado(2);
+        quadrado.setCor("vermelho");
+
+        Quadrado quadrado1 = FlyweightFactory.obterQuadrado(2);
+        quadrado1.setCor("azul");
+
+        Quadrado quadrado2 = FlyweightFactory.obterQuadrado(4);
+        quadrado2.setCor("preto");
+
+        assertEquals(quadrado.getTamanho(), 2);
+        assertEquals(quadrado1.getCor(), "azul");
+        assertEquals(FlyweightFactory.quadradoMap.size() == 2, true);
 
     }
 

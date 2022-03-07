@@ -1,11 +1,11 @@
 package Aula09S_Integradora3.model;
 
-public class Triangulo {
+public class Quadrado {
     private String cor;
     private int tamanho;
 
-    public Triangulo(String cor) {
-        this.cor = cor;
+    public Quadrado(int tamanho) {
+        this.tamanho = tamanho;
     }
 
     public String getCor() {
