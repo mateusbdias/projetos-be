@@ -39,16 +39,6 @@ public class Main {
 
         Lista lista3 = new Lista();
         lista3.qtdNumeros();
-
-        /*Leao leao = new Leao("Simba", 4, true);
-        leao.correr();
-        leao.eMaiorQue10();
-
-        Tigre tigre = new Tigre();
-        tigre.setNome("Scar");
-        tigre.setIdade(11);
-        tigre.correr();
-        tigre.eMaiorQue10();*/
     }
 
 }
