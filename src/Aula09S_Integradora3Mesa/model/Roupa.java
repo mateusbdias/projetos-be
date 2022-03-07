@@ -5,11 +5,15 @@ public class Roupa {
     private String tipo;
     private boolean nova;
     private boolean importada;
+    private static int contador;
 
-    public Roupa(String tamanho, boolean nova, boolean importada) {
+    public Roupa(String tamanho, String tipo, boolean nova, boolean importada) {
         this.tamanho = tamanho;
+        this.tipo = tipo;
         this.nova = nova;
         this.importada = importada;
+        contador++;
+        System.out.println("Contagem: " + contador);
     }
 
     public String getTamanho() {
@@ -42,5 +46,15 @@ public class Roupa {
 
     public void setImportada(boolean importada) {
         this.importada = importada;
+    }
+
+    @Override
+    public String toString() {
+        return "Roupa{" +
+                "tamanho='" + tamanho + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", nova=" + nova +
+                ", importada=" + importada +
+                '}';
     }
 }
