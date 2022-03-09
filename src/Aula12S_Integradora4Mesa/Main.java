@@ -82,53 +82,59 @@ public class Main {
         }
     }
 
+    public static String getEmployeeInfoById(int id, Connection connection) throws Exception {
+        Statement statement = connection.createStatement();
+        String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
+        String employeeInfo = "";
+        ResultSet rs = statement.executeQuery(sqlSelect);
+        while (rs.next()) {
+            employeeInfo = rs.getInt(1) + " | "
+                    + rs.getString(2) + " | "
+                    + rs.getString(3) + " | "
+                    + rs.getString(4) + " | "
+                    + rs.getString(5);
+        }
+        return employeeInfo;
+    }
+
+    public static String getEmployeeInfoByField(String field, String data, Connection connection) throws Exception {
+        Statement statement = connection.createStatement();
+        String sqlSelect = "SELECT * FROM employee WHERE " + field + " = '" + data + "'";
+        String employeeInfo = "";
+        ResultSet rs = statement.executeQuery(sqlSelect);
+        while (rs.next()) {
+            employeeInfo = rs.getInt(1) + " | "
+                    + rs.getString(2) + " | "
+                    + rs.getString(3) + " | "
+                    + rs.getString(4) + " | "
+                    + rs.getString(5);
+        }
+        return employeeInfo;
+    }
+
     public static void updateById(int id, String field, String data, Connection connection) throws Exception {
         Statement statement = connection.createStatement();
         String sqlUpdate = "UPDATE employee SET " + field + " = '" + data + "' WHERE id = " + id;
         statement.execute(sqlUpdate);
-        String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
-        ResultSet rs = statement.executeQuery(sqlSelect);
-        while (rs.next()) {
-            LOGGER.debug("Updated employee: " + rs.getInt(1) + " | "
-                    + rs.getString(2) + " | "
-                    + rs.getString(3) + " | "
-                    + rs.getString(4) + " | "
-                    + rs.getString(5));
-        }
+        LOGGER.debug("Updated employee: " + getEmployeeInfoById(id, connection));
     }
 
     public static void deleteById(int id, Connection connection) throws Exception {
         LOGGER.info("Deleting employee with id " + id + " ...");
         Statement statement = connection.createStatement();
-        String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
-        ResultSet rs = statement.executeQuery(sqlSelect);
-        while (rs.next()) {
-            LOGGER.info("Employee to be deleted: " + rs.getInt(1) + " | "
-                    + rs.getString(2) + " | "
-                    + rs.getString(3) + " | "
-                    + rs.getString(4) + " | "
-                    + rs.getString(5));
-        }
+        String employeeInfo = getEmployeeInfoById(id, connection);
         String sqlDelete = "DELETE FROM employee WHERE id = " + id;
         statement.execute(sqlDelete);
+        LOGGER.info("Deleted employee: " + employeeInfo);
     }
 
     public static void deleteByField(String field, String data, Connection connection) throws Exception {
         LOGGER.info("Deleting employee with " + field + " " + data);
         Statement statement = connection.createStatement();
-        String sqlSelect = "SELECT * FROM employee "
-                + "WHERE " + field + " = '" + data + "'";
-        ResultSet rs = statement.executeQuery(sqlSelect);
-        while (rs.next()) {
-            LOGGER.info("Employee to be deleted: " + rs.getInt(1) + " | "
-                    + rs.getString(2) + " | "
-                    + rs.getString(3) + " | "
-                    + rs.getString(4) + " | "
-                    + rs.getString(5));
-        }
-        String sqlDelete = "DELETE FROM employee "
-                + "WHERE " + field + " = '" + data + "'";
+        String employeeInfo = getEmployeeInfoByField(field, data, connection);
+        String sqlDelete = "DELETE FROM employee WHERE " + field + " = '" + data + "'";
         statement.execute(sqlDelete);
+        LOGGER.info("Deleted employee: " + employeeInfo);
     }
 
 }
