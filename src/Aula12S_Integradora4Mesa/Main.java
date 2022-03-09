@@ -32,9 +32,6 @@ public class Main {
             + "(id, name, surname, dob, dept) "
             + "VALUES (3, 'Federico', 'Viticci', '1983-10-01', 'EiC')";
 
-    private static final String SQLUPDATE = "UPDATE employee "
-            + "SET dept = 'CFO' WHERE id = 1";
-
     public static void main(String[] args) throws Exception {
 
         BasicConfigurator.configure();
@@ -51,9 +48,7 @@ public class Main {
             statement.execute(SQLINSERT3);
             showEmployees(connection);
             LOGGER.info("Updating data ...");
-            statement.execute(SQLUPDATE);
-            System.out.println("Updated:");
-            showEmployeeById(1, connection);
+            updateById(1, "dept", "CFO", connection);
             deleteById(3, connection);
             showEmployees(connection);
             deleteByField("surname", "Snell", connection);
@@ -87,46 +82,53 @@ public class Main {
         }
     }
 
-    public static void showEmployeeById(int id, Connection connection) throws Exception {
-        String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
+    public static void updateById(int id, String field, String data, Connection connection) throws Exception {
         Statement statement = connection.createStatement();
+        String sqlUpdate = "UPDATE employee SET " + field + " = '" + data + "' WHERE id = " + id;
+        statement.execute(sqlUpdate);
+        String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
         ResultSet rs = statement.executeQuery(sqlSelect);
-        LOGGER.info("Viewing data ...");
-        System.out.println(rs.getInt(1) + " | "
-                + rs.getString(2) + " | "
-                + rs.getString(3) + " | "
-                + rs.getString(4) + " | "
-                + rs.getString(5));
+        while (rs.next()) {
+            LOGGER.debug("Updated employee: " + rs.getInt(1) + " | "
+                    + rs.getString(2) + " | "
+                    + rs.getString(3) + " | "
+                    + rs.getString(4) + " | "
+                    + rs.getString(5));
+        }
     }
 
     public static void deleteById(int id, Connection connection) throws Exception {
+        LOGGER.info("Deleting employee with id " + id + " ...");
         Statement statement = connection.createStatement();
         String sqlSelect = "SELECT * FROM employee WHERE id = " + id;
         ResultSet rs = statement.executeQuery(sqlSelect);
+        while (rs.next()) {
+            LOGGER.info("Employee to be deleted: " + rs.getInt(1) + " | "
+                    + rs.getString(2) + " | "
+                    + rs.getString(3) + " | "
+                    + rs.getString(4) + " | "
+                    + rs.getString(5));
+        }
         String sqlDelete = "DELETE FROM employee WHERE id = " + id;
-        LOGGER.info("Deleting employee with id " + id + " ...");
         statement.execute(sqlDelete);
-        System.out.println("Deleted: " + rs.getInt(1) + " | "
-                + rs.getString(2) + " | "
-                + rs.getString(3) + " | "
-                + rs.getString(4) + " | "
-                + rs.getString(5));
     }
 
     public static void deleteByField(String field, String data, Connection connection) throws Exception {
+        LOGGER.info("Deleting employee with " + field + " " + data);
         Statement statement = connection.createStatement();
         String sqlSelect = "SELECT * FROM employee "
-                + "WHERE " + field + " = " + data;
+                + "WHERE " + field + " = '" + data + "'";
         ResultSet rs = statement.executeQuery(sqlSelect);
+        while (rs.next()) {
+            LOGGER.info("Employee to be deleted: " + rs.getInt(1) + " | "
+                    + rs.getString(2) + " | "
+                    + rs.getString(3) + " | "
+                    + rs.getString(4) + " | "
+                    + rs.getString(5));
+        }
         String sqlDelete = "DELETE FROM employee "
-                + "WHERE " + field + " = " + data;
-        LOGGER.info("Deleting employee with " + field + " = " + data);
+                + "WHERE " + field + " = '" + data + "'";
         statement.execute(sqlDelete);
-        System.out.println("Deleted: " + rs.getInt(1) + " | "
-                + rs.getString(2) + " | "
-                + rs.getString(3) + " | "
-                + rs.getString(4) + " | "
-                + rs.getString(5));
     }
 
 }
