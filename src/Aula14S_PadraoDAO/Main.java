@@ -8,7 +8,6 @@ import Aula14S_PadraoDAO.service.MedicamentoService;
 public class Main {
 
     public static void main(String[] args) {
-
         MedicamentoService medService = new MedicamentoService(
                 new MedicamentoDaoH2(
                         new ConfigJDBC()));
@@ -17,7 +16,6 @@ public class Main {
                 "Ibuprofeno", "Aché", 395, 35.7);
 
         medService.salvar(medicamento);
-
     }
 
 }

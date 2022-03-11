@@ -38,5 +38,4 @@ public class ConfigJDBC {
         }
         return connection;
     }
-
 }

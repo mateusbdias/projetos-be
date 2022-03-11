@@ -14,5 +14,4 @@ public class MedicamentoService {
     public Medicamento salvar(Medicamento medicamento) {
         return medicamentoIDao.salvar(medicamento);
     }
-
 }
