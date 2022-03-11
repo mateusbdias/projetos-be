@@ -20,7 +20,7 @@ public class ConfigJDBC {
 
     public ConfigJDBC() {
         this.jdbcDriver = "org.h2.Driver";
-        this.dbUrl = "jdbc:h2:mem:aula14";
+        this.dbUrl = "jdbc:h2:mem:aula14;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'create_aula14.sql'";
         this.nomeUsuario = "sa";
         this.senha = "";
     }
