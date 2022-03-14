@@ -15,7 +15,7 @@ public class Main {
         Medicamento medicamento = new Medicamento(
                 "Ibuprofeno", "Aché", 395, 35.7);
 
-        medService.salvar(medicamento);
+        medService.pesquisarId(medicamento);
     }
 
 }
