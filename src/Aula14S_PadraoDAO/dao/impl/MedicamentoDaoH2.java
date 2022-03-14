@@ -47,4 +47,28 @@ public class MedicamentoDaoH2 implements IDao<Medicamento> {
 
     }
 
+    @Override
+    public void pesquisarId(Medicamento medicamento) {
+        Connection connection = configJDBC.conectarComBD();
+        salvar(medicamento);
+        String query = "SELECT * FROM medicamentos WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, medicamento.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt(1)
+                + " | Nome: " + rs.getString(2)
+                + " | Laboratório: " + rs.getString(3)
+                + " | Qtd: " + rs.getInt(4)
+                + " | Preço: " + rs.getDouble(5));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

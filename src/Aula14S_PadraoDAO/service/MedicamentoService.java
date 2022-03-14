@@ -14,4 +14,8 @@ public class MedicamentoService {
     public Medicamento salvar(Medicamento medicamento) {
         return medicamentoIDao.salvar(medicamento);
     }
+
+    public void pesquisarId(Medicamento medicamento) {
+        medicamentoIDao.pesquisarId(medicamento);
+    }
 }
